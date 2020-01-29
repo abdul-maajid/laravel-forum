@@ -49,6 +49,14 @@
                                 </li>
                             @endif
                         @else
+                        <li class="nav-item dropdown">
+                            <a href="#" id="channelDropdown" class="nav-link dropdown-toggle" role="buttonr" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false" v-pre>Channel <span class="caret"></span></a>
+
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="channelDropdown">
+                                <a href="{{ route('channels.create') }}" class="dropdown-item">New Channel</a>
+                                <a href="{{ route('channels.index') }}" class="dropdown-item">Channels</a>
+                            </div>
+                        </li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
