@@ -18,5 +18,12 @@ class UsersTableSeeder extends Seeder
             'admin' => 1,
             'avatar' => asset('avatars/avatar.png')
         ]);
+        
+        App\User::create([
+            'name' => 'Emily Khatti',
+            'password' => bcrypt('password'),
+            'email' => 'emaily@laravel.com',
+            'avatar' => asset('avatars/avatar.png')
+        ]);
     }
 }

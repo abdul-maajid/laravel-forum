@@ -9,18 +9,36 @@
 
                 <div class="card-body">
                     <form action="{{ route('discussions.store') }}" method="POST">
+                        @csrf
+
+                        <div class="form-group">
+                          <label for="">Title</label>
+                          <input type="text" name="title" id="title" class="form-control">
+                          @error('title')
+                            <small id="helpId" class="text-muted">{{ $message }}</small>
+                        @enderror
+                        </div>
+
                         <div class="form-group">
                             <label for="channel">Pick a Channel</label>
-                            <select name="channel" id="channel" class="form-control">
+                            <select name="channel_id" id="channel" class="form-control">
                                 @foreach($channels as $channel)
                                     <option value="{{ $channel->id }}"> {{ $channel->title }} </option>
                                 @endforeach
                             </select>
+
+                            @error('channel')
+                                <small id="helpId" class="text-muted">{{ $message }}</small>
+                            @enderror
                         </div>
 
                         <div class="form-group">
                             <label for="question">Ask a Question</label>
-                            <textarea name="discussion" id="question" class="form-control" rows="10" placeholder="Write your quesion here..."></textarea>
+                            <textarea name="content" id="question" class="form-control" rows="10" placeholder="Write your quesion here..."></textarea>
+                            
+                            @error('content')
+                                <small id="helpId" class="text-muted">{{ $message }}</small>
+                            @enderror
                         </div>
 
                         <div class="form-group">

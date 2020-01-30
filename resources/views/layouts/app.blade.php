@@ -83,22 +83,26 @@
 
         <div class="container pt-5">
             <div class="row">
-                <div class="col-md-4">
-                    <a href="{{ route('discussions.create') }}" class='btn btn-primary btn-block mb-4'>Create New Discussion</a>
-                    <div class="card card-default">
-                        <h4 class="card-header">Channels</h4>
-                        <div class="card-body">
-                            <ul class="list-group list-group-flush">
-                                @foreach($channels as $channel)
-                                    <li class="list-group-item">{{ $channel->title }}</li>
-                                @endforeach
-                            </ul>
+                @if (Route::has('login'))
+                    @auth
+                    
+                        <div class="col-md-4">
+                            <a href="{{ route('discussions.create') }}" class='btn btn-primary btn-block mb-4'>Create New Discussion</a>
+                            <div class="card card-default">
+                                <h4 class="card-header">Channels</h4>
+                                <div class="card-body">
+                                    <ul class="list-group list-group-flush">
+                                        @foreach($channels as $channel)
+                                            <li class="list-group-item">{{ $channel->title }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
 
-                <div class="col-md-8">
-                    <!-- <main class="py-4"> -->
+                        <div class="col-md-8">
+                    @endauth
+                @endif
                         @yield('content')
                     <!-- </main> -->
                 </div>
