@@ -17,19 +17,23 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/forum', 'ForumsController@index')->name('forum');
 
 Route::get('{provider}/auth', 'SocialsController@auth')->name('social.auth');
 
 Route::get('{provider}/redirect', 'SocialsController@auth_callback')->name('social.callback');
+
+Route::get('discussion/{slug}', 'DiscussionsController@show')->name('discussions.show');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::resource('channels', 'ChannelsController');
     
     Route::get('discussion/create', 'DiscussionsController@create')->name('discussions.create');
     Route::post('discussion/store', 'DiscussionsController@store')->name('discussions.store');
+    Route::post('discussions/reply/{id}', 'DiscussionsController@reply')->name('discussions.reply');
     
-    Route::get('discussion/{slug}', 'DiscussionsController@show')->name('discussions.show');
+    Route::get('/reply/like/{id}', 'RepliesController@like')->name('reply.like');
+    Route::get('/reply/unlike/{id}', 'RepliesController@unlike')->name('reply.unlike');
 });
 
 
