@@ -24,6 +24,7 @@ Route::get('{provider}/auth', 'SocialsController@auth')->name('social.auth');
 Route::get('{provider}/redirect', 'SocialsController@auth_callback')->name('social.callback');
 
 Route::get('discussion/{slug}', 'DiscussionsController@show')->name('discussions.show');
+Route::get('channel/{slug}', 'ForumsController@channel')->name('channel');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::resource('channels', 'ChannelsController');

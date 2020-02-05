@@ -103,7 +103,7 @@
                                 <div class="card-body">
                                     <ul class="list-group list-group-flush">
                                         @foreach($channels as $channel)
-                                            <li class="list-group-item">{{ $channel->title }}</li>
+                                            <li class="list-group-item"><a href="{{ route('channel', ['slug' => $channel->slug]) }}" style="text-decoration: none;">{{ $channel->title }}</a></li>
                                         @endforeach
                                     </ul>
                                 </div>
