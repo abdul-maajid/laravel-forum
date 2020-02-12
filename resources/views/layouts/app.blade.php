@@ -35,8 +35,8 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                <a class="navbar-brand" href="{{ url('/forum') }}">
+                    {{ config('app.name', 'Laravel Forum') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -94,7 +94,7 @@
         <div class="container pt-5">
             <div class="row">
                 @if (Route::has('login'))
-                    @auth
+                    {{-- @auth --}}
                     
                         <div class="col-md-4">
                             <a href="{{ route('discussions.create') }}" class='btn btn-primary btn-block mb-4'>Create New Discussion</a>
@@ -111,7 +111,7 @@
                         </div>
 
                         <div class="col-md-8">
-                    @endauth
+                    {{-- @endauth --}}
                 @endif
                         @yield('content')
                     <!-- </main> -->

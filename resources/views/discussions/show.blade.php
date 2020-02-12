@@ -19,7 +19,9 @@
                 </div>
 
                 <div class="card-footer">
-                    {{ $disc->replies->count() }} Replies
+                    <p class="float-left">{{ $disc->replies->count() }} Replies</p>
+                    <a href="{{ route('channel', ['slug' => $disc->channel->slug]) }}" class="btn btn-secondary float-right btn-sm">{{ $disc->channel->title }}</a>
+                    <div class="clearfix"></div>
                     @foreach($disc->replies as $r)
                     
                     <div class="card mb-3">
@@ -44,21 +46,25 @@
 
                     <div class="card">
                         <div class="card-body">
-                            <form action="{{ route('discussions.reply', ['id' => $disc->id]) }}" method="POST">
-                                @csrf
+                            @if(Auth::check())
+                                <form action="{{ route('discussions.reply', ['id' => $disc->id]) }}" method="POST">
+                                    @csrf
 
-                                <div class="form-group">
-                                    <label for="reply">Leave a reply...</label>
-                                    <textarea name="reply" id="reply" class="form-control" cols="30" rows="5"></textarea>
-                                    @error('reply')
-                                        <p class="form-text text-muted">{{ $message }}</p>
-                                    @enderror
-                                </div>
-                                <div class="form-group">
-                                    <button type="submit" class="btn btn-success"><i class="fas fa-send"></i> Send</button>
-                                </div>
-                                
-                            </form>
+                                    <div class="form-group">
+                                        <label for="reply">Leave a reply...</label>
+                                        <textarea name="reply" id="reply" class="form-control" cols="30" rows="5"></textarea>
+                                        @error('reply')
+                                            <p class="form-text text-muted">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-success"><i class="fas fa-send"></i> Send</button>
+                                    </div>
+                                    
+                                </form>
+                            @else
+                            <h4 class="text-center text-success">Please <a href="/login">login</a> to reply..</h4>
+                            @endif
                         </div>
                     </div>
                 </div>

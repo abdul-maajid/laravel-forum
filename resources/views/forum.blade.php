@@ -34,7 +34,8 @@
                     </div>
 
                     <div class="card-footer text-muted">
-                        {{ $disc->replies->count() }} Replies
+                        <p class="float-left">{{ $disc->replies->count() }} Replies</p>
+                        <a href="{{ route('channel', ['slug' => $disc->channel->slug]) }}" class="btn btn-secondary float-right btn-sm">{{ $disc->channel->title }}</a>
                     </div>                
                 </div>
                 
