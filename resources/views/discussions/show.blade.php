@@ -10,6 +10,11 @@
                     <img src="{{ $disc->user->avatar }}" class="img-fluid rounded-circle mr-2" alt="Avatar Missing" style="height: 45px; width: 45px;">
                     <span class="text-center" style="color: darkblue; font-weight: bold">{{ $disc->user->name }}: </span>
                     <small class="text-muted">{{ $disc->created_at->diffForHumans() }}</small>
+                    @if ($disc->is_being_watched_by_auth_user($disc->id))
+                        <a href="{{ route('discussion.unwatch', ['id' => $disc->id]) }}" class="btn btn-secondary btn-sm float-right mt-2">Unwatch</a>
+                    @else
+                        <a href="{{ route('discussion.watch', ['id' => $disc->id]) }}" class="btn btn-secondary btn-sm float-right mt-2">Watch</a>
+                    @endif
                 </div>
                 <div class="card-body">
                     <h4 class="card-title text-center">{{ $disc->title }}</h4>
