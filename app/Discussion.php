@@ -27,7 +27,7 @@ class Discussion extends Model
 
     public function watchers()
     {
-        return $this->hasMany('App\Watchers');
+        return $this->hasMany('App\Watcher');
     }
 
     public function is_being_watched_by_auth_user($id)

@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use Session;
 use App\Discussion;
 use App\Reply;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
 
 class DiscussionsController extends Controller
 {
@@ -42,6 +44,7 @@ class DiscussionsController extends Controller
 
     public function reply(Request $request, $id)
     {
+        $d = Discussion::find($id);
         $validatedReply = $request->validate([
             'reply' => 'required|min:3'
         ]);
@@ -51,6 +54,14 @@ class DiscussionsController extends Controller
             'discussion_id' => $id,
             'content' => $validatedReply['reply'],
         ]);
+
+        $watchers = [];
+
+        foreach($d->watchers as $watcher):
+            array_push($watchers, User::find($watcher->user_id));
+        endforeach;
+
+        Notification::send($watchers, new \App\Notifications\NewReplyAdded($d));
 
         Session::flash('success', "Reply Posted Successfully!");
         return redirect()->back();
